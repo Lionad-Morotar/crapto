@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 import { FTCController }  from './FTC.controller';
-// import TreeProvider  from './FTC.tree';
+import { COMMAND_TEST, LogLevel } from './constants.js';
 
 /**
 	* Activate the extension.
@@ -9,9 +9,12 @@ import { FTCController }  from './FTC.controller';
 export function activate(context: vscode.ExtensionContext) {
 	const controller = new FTCController();
 
-	context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.test', controller.createSecret, controller));
-	// context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.gists-on', controller.gistsOn, controller));
-	// context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.gists-on', controller.gistsOff, controller));
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			COMMAND_TEST.key,
+			controller.createSecret
+		)
+	);
 
 	// const treeProvider = new TreeProvider(controller);
 

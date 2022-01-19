@@ -4,13 +4,30 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "Build Project",
 			"type": "npm",
-			"script": "watch",
-			"problemMatcher": "$tsc-watch",
+			"script": "build",
 			"isBackground": true,
 			"presentation": {
 				"reveal": "never"
 			},
+		},
+		{
+			"label": "Build TSC",
+			"type": "npm",
+			"script": "compile",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never"
+			},
+		},
+		{
+			"label": "Build",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build Project",
+				"Build TSC"
+			],
 			"group": {
 				"kind": "build",
 				"isDefault": true
