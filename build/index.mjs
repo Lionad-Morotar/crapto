@@ -8,10 +8,7 @@ const commands = [COMMAND_TEST];
 let packageJSON = {},
   packageJSONContent = null;
 try {
-  packageJSONContent = fs.readFileSync(
-    "D:/@Github/file-text-crypto/package.raw.json",
-    "utf8"
-  );
+  packageJSONContent = fs.readFileSync(path.resolve("package.json"), "utf8");
 } catch (err) {
   console.error("Failed in read package.json, please check.");
 }
@@ -21,21 +18,13 @@ try {
   console.error("Failed in parse package.json, please check.");
 }
 
-packageJSON.contributes = {
-  commands: commands.map((x) => ({
-    title: x.desc,
-    command: x.key,
-  })),
-  snippets: [
-    {
-      language: "markdown",
-      path: "./snippets/snippets.json",
-    },
-  ],
-};
+packageJSON.contributes.commands = commands.map((x) => ({
+  title: x.desc,
+  command: x.key,
+}));
 
 fs.writeFileSync(
-  "D:/@Github/file-text-crypto/package.json",
+  path.resolve("package.json"),
   JSON.stringify(packageJSON, null, 2),
   "utf8"
 );

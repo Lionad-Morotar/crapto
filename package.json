@@ -46,16 +46,16 @@
     "rimraf": "^3.0.2"
   },
   "contributes": {
-    "commands": [
-      {
-        "title": "FTC: Test Command",
-        "command": "ftc.test"
-      }
-    ],
     "snippets": [
       {
         "language": "markdown",
         "path": "./snippets/snippets.json"
+      }
+    ],
+    "commands": [
+      {
+        "title": "FTC: Test Command",
+        "command": "ftc.test"
       }
     ]
   }
