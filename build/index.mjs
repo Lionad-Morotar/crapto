@@ -1,9 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { COMMAND_TEST } from "../out/constants.js";
-
-const commands = [COMMAND_TEST];
+import * as commands from "../out/constants.js";
 
 let packageJSON = {},
   packageJSONContent = null;
@@ -18,10 +16,12 @@ try {
   console.error("Failed in parse package.json, please check.");
 }
 
-packageJSON.contributes.commands = commands.map((x) => ({
-  title: x.desc,
-  command: x.key,
-}));
+packageJSON.contributes.commands = Object.entries(commands)
+  .filter(([k, v]) => k.startsWith("COMMAND"))
+  .map(([k, v]) => ({
+    title: v.desc,
+    command: v.key,
+  }));
 
 fs.writeFileSync(
   path.resolve("package.json"),

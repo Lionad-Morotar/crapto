@@ -1,11 +1,8 @@
 export const COMMAND_TEST = {
   key: 'ftc.test',
-  desc: 'FTC: Test Command'
+  desc: 'FTC: Test command'
 };
-
-export enum LogLevel {
-  debug = 0,
-  info = 1,
-  warn = 2,
-  error = 3
-}
+export const COMMAND_PROMPT = {
+  key: 'ftc.prompt',
+  desc: 'FTC: Enter the text before encryption'
+};

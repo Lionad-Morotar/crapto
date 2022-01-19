@@ -54,7 +54,11 @@
     ],
     "commands": [
       {
-        "title": "FTC: Test Command",
+        "title": "FTC: Enter the text before encryption",
+        "command": "ftc.prompt"
+      },
+      {
+        "title": "FTC: Test command",
         "command": "ftc.test"
       }
     ]

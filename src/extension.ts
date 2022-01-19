@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
-import { FTCController }  from './FTC.controller';
-import { COMMAND_TEST, LogLevel } from './constants.js';
+import { FTCController }  from './controller';
+import { COMMAND_TEST, COMMAND_PROMPT } from './constants.js';
 
 /**
 	* Activate the extension.
@@ -13,6 +13,12 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(
 			COMMAND_TEST.key,
 			controller.createSecret
+		)
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			COMMAND_PROMPT.key,
+			controller.cryptoText
 		)
 	);
 
