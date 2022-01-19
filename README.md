@@ -1,70 +1,46 @@
-# file-text-crypto README
+# file-text-crypto
 
-This is the README for your extension "file-text-crypto". After writing up a brief description, we recommend including the following sections.
-
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+[TOC]
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.1.0
 
-### 1.0.0
+自动给每一个文件创建对应密钥，储存在 your_project/.ftc/keys.json 中，请务必修改 .gitignore！
 
-Initial release of ...
+* 使用快捷键 alt+f i 快速输入加密内容
+* 使用快捷键 alt+f d 解密选中内容
 
-### 1.0.1
+## 简介
 
-Fixed issue #.
+WIP Warning, PR wanted!
 
-### 1.1.0
+file-text-crypto，以下简称 FTC，是一款可以给你的代码中部分内容或全文加密的插件。想象你有这么一个情景：在你的开源博客系统中，你写了一些带有隐式的日记，使用 FTC 可以让你在本地编辑时自由编辑，而编辑时生成的文本内容是加密后的信息，这样一来，就算上传到 Github 后，别人也无法查看到你的隐私原文。
 
-Added features X, Y, and Z.
+**FTC 会把文件的密钥存在本地目录，所以请务必把密钥文件所在的文件夹加入 .gitignore（密钥默认储存在 .ftc 文件夹）防止 Git 系统把密钥传到了远端。**
 
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
+由于我的业余时间有限，所以目前仅支持加密 markdown 文件中的特定标识文本。如果你有其它更好的想法，欢迎 Pin Issues 或者 Pull Request ！
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+## 原理
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+FTC 根据文件的特定注释内容来判断该文件是否开启了加密，比方说，你可以使用指令 ftc.gists-on 在文件头部快速加入这段特定注释（当然，手动也完全可以）。
 
-## Working with Markdown
+```markdown
+<!-- FTC:on -->
+```
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+FTC 在文件中开启之后，FTC 会寻找在 FTC:on 以下一直到 FTC:off 的文本内容中特定的标识，并将其进行加密。比如以下文本 `_*_secrets_*_` 中的 `_*_` 就是加密标识，`secrets` 则是加密内容。
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+```markdown
+Normal text...
+<!-- FTC:on -->
+Normal text，_*_secrets_*_，Normal text
+<!-- FTC:off -->
+Normal text...
+```
 
-### For more information
+<!-- 加密标识总是开头结尾对应的。如果你想加密整个文件，你可以使用指令 ftc.crypto-entire-file 快速加入以下注释：
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+```markdown
+<!-- FTC:entire -->
 
-**Enjoy!**
