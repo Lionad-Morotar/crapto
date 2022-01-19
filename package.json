@@ -56,8 +56,14 @@
     ],
     "commands": [
       {
-        "title": "FTC: Enter the text before encryption",
+        "title": "FTC: Enter the text you want to encrypt",
         "command": "ftc.prompt"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ftc.prompt",
+        "key": "alt+f i"
       }
     ]
   }

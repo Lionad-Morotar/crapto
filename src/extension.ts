@@ -16,8 +16,6 @@ export function activate(context: vscode.ExtensionContext) {
 		)
 	);
 
-	// const treeProvider = new TreeProvider(controller);
-
 	vscode.workspace.onDidChangeConfiguration(evt => {
 		if ( evt.affectsConfiguration('ftc') ) {
 			// TODO refresh
@@ -25,7 +23,4 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 }
 
-/**
-	* Sure not.
-	*/
-// export function deactivate() {}
+export function deactivate() {}
