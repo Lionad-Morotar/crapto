@@ -12,6 +12,7 @@
 		"text"
 	],
 	"categories": [
+		"Snippets",
 		"Other"
 	],
 	"activationEvents": [
@@ -23,6 +24,12 @@
 			{
 				"title": "ftc.test",
 				"command": "ftc.test"
+			}
+		],
+		"snippets": [
+			{
+				"language": "markdown",
+				"path": "./snippets/snippets.json"
 			}
 		]
 	},

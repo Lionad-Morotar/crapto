@@ -1,0 +1,16 @@
+{
+  "ftcon": {
+    "prefix": "ftcon",
+    "body": [
+      "<!-- FTC:on -->\n"
+    ],
+    "description": "FTC enabled start from here."
+  },
+  "ftcoff": {
+    "prefix": "ftcoff",
+    "body": [
+      "<!-- FTC:off -->\n"
+    ],
+    "description": "FTC enable until this line."
+  }
+}
