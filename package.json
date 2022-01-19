@@ -56,7 +56,11 @@
     ],
     "commands": [
       {
-        "title": "FTC: Enter the text you want to encrypt",
+        "title": "FTC: Decrypt the selected text.",
+        "command": "ftc.decrypto"
+      },
+      {
+        "title": "FTC: Enter the text before encryption.",
         "command": "ftc.prompt"
       }
     ],
@@ -64,6 +68,10 @@
       {
         "command": "ftc.prompt",
         "key": "alt+f i"
+      },
+      {
+        "command": "ftc.decrypto",
+        "key": "alt+f d"
       }
     ]
   }

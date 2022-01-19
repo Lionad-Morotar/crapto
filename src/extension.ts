@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 import { FTCController }  from './controller';
-import { COMMAND_PROMPT } from './constants.js';
+import { COMMAND_PROMPT, COMMAND_DECRYPTION } from './constants.js';
 
 /**
 	* Activate the extension.
@@ -13,6 +13,13 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand(
 			COMMAND_PROMPT.key,
 			controller.cryptoText.bind(controller)
+		)
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand(
+			COMMAND_DECRYPTION.key,
+			controller.deCryptoText.bind(controller)
 		)
 	);
 

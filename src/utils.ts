@@ -49,3 +49,14 @@ export function mkDirRecursive(fsPath: string): boolean {
     return false;
   }
 }
+
+export const assertion = {
+  activeEditor () {
+    const editor = vscode.window.activeTextEditor;
+    if (!(editor && editor.document && editor.edit)) {
+      show('No active dcoument');
+      throw new Error('done');
+    }
+    return editor;
+  }
+};

@@ -4,7 +4,7 @@ import fs = require('fs');
 import path = require('path');
 
 import { ISetting, Setting, IKey } from './setting';
-import { getCurWSFolderURI, showError, show, log, getRandKey } from './utils';
+import { getCurWSFolderURI, showError, show, log, getRandKey, assertion } from './utils';
 
 const cryptoJS = require("crypto-js");
 
@@ -17,27 +17,13 @@ export class FTCController {
   }
 
   public async cryptoText() {
-    const validateInput = function (key: string) {
-      if (!key) {
-        return 'ESC to cancel input';
-      }
-      return '';
-    };
-    const editor = vscode.window.activeTextEditor;
-    if (!(editor && editor.document && editor.edit)) {
-      return show('No active dcoument');
-    }
-
+    const editor = assertion.activeEditor();
     const fsPath = editor.document.uri.fsPath;
     let prompt = '';
     if (!this.setting.inited) {
       await this.initSetting();
     }
-    let key = this.setting.get().keys.find(x => {
-      const isFSPathEqual = () => x.fsPath && (x.fsPath === fsPath);
-      const isRegexTested = () => x.regex && x.regex.test(fsPath);
-      return isFSPathEqual() || isRegexTested();
-    });
+    let key = await this.getKeyFor(fsPath);
     if (key) {
       log('use finded key:', key);
     } else {
@@ -55,6 +41,12 @@ export class FTCController {
       prompt = `[FIND_KEY]: ${key.regex || key.fsPath}`;
     }
 
+    const validateInput = function (key: string) {
+      if (!key) {
+        return 'ESC to cancel input';
+      }
+      return '';
+    };
     const options = {
       prompt: '',
       placeHolder: 'Text you want to encrypt',
@@ -70,7 +62,6 @@ export class FTCController {
       if (!invalid) {
         const label = this.setting.get().label;
         const secretText = cryptoJS.AES.encrypt(val, key!.secret).toString();
-        // cryptoJS.AES.decrypt(secretText, key!.secret).toString(cryptoJS.enc.Utf8);
         const writeContent = `${label}${secretText}${label}`;
         editor.edit((textEdit) => {
           textEdit.insert(editor.selection.active, writeContent);
@@ -79,7 +70,35 @@ export class FTCController {
     });
   }
 
-  private async initSetting () {
+  public async deCryptoText() {
+    const editor = assertion.activeEditor();
+    let selection = editor.document.getText(editor.selection);
+		if(!selection) {
+      return false;
+		}
+    
+    const fsPath = editor.document.uri.fsPath;
+    const key = await this.getKeyFor(fsPath);
+    if (key) {
+      const secretText = cryptoJS.AES.decrypt(selection, key!.secret).toString(cryptoJS.enc.Utf8);
+      vscode.window.showInformationMessage(secretText);
+    } else {
+      showError('No key found for this file.');
+    }
+  }
+
+  private async getKeyFor(fsPath: string): Promise<IKey | undefined> {
+    if (!this.setting.inited) {
+      await this.initSetting();
+    }
+    return this.setting.get().keys.find(x => {
+      const isFSPathEqual = () => x.fsPath && (x.fsPath === fsPath);
+      const isRegexTested = () => x.regex && x.regex.test(fsPath);
+      return isFSPathEqual() || isRegexTested();
+    });
+  }
+
+  private async initSetting() {
     const wsFolderURI = getCurWSFolderURI();
     if (!wsFolderURI) {
       return showError('No opened document');
