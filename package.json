@@ -21,8 +21,8 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "file-text-crypto.helloWorld",
-				"title": "Hello World"
+				"title": "ftc.test",
+				"command": "ftc.test"
 			}
 		]
 	},
