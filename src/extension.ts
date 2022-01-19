@@ -12,13 +12,13 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand(
 			COMMAND_TEST.key,
-			controller.createSecret
+			controller.createSecret.bind(controller)
 		)
 	);
 	context.subscriptions.push(
 		vscode.commands.registerCommand(
 			COMMAND_PROMPT.key,
-			controller.cryptoText
+			controller.cryptoText.bind(controller)
 		)
 	);
 

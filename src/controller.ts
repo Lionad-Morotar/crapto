@@ -3,11 +3,12 @@ import * as vscode from 'vscode';
 import fs = require('fs');
 import path = require('path');
 
-import glob = require('glob');
-import anymatch = require('anymatch');
-
 import { ISetting, Setting } from './setting';
 import { getCurWSFolderURI, showError, show } from './utils';
+
+const glob = require('glob');
+const anymatch = require('anymatch');
+const cryptoJS = require("crypto-js");
 
 export class FTCController {
 
@@ -22,7 +23,7 @@ export class FTCController {
     if (!wsFolderURI) {
       return vscode.window.showInformationMessage('No opened document');
     }
-    const setting = this.setting.get(wsFolderURI);
+    const setting = this.setting.init(wsFolderURI);
     this.mkDirRecursive(setting.secretPath);
     const target = path.join(setting.secretPath, setting.secretName);
     fs.writeFileSync(target, 'test');
@@ -52,8 +53,12 @@ export class FTCController {
       }
       const invalid = validateInput(val);
       if (!invalid) {
+        const label = this.setting.get().label;
+        const secretText = cryptoJS.AES.encrypt(val, 'anypassword').toString();
+        // cryptoJS.AES.decrypt(secretText, 'anypassword').toString(cryptoJS.enc.Utf8);
+        const writeContent = `${label}${secretText}${label}`;
         editor.edit((textEdit) => {
-          textEdit.insert(editor.selection.active, val);
+          textEdit.insert(editor.selection.active, writeContent);
         });
       }
     });
