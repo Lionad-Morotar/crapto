@@ -6,6 +6,7 @@
   "engines": {
     "vscode": "^1.63.0"
   },
+  "publisher": "lionad",
   "keywords": [
     "file",
     "crypto",
