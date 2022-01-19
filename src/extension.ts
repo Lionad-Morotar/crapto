@@ -1,26 +1,28 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import { FTCController }  from './FTC.controller';
+// import TreeProvider  from './FTC.tree';
+
+/**
+	* Activate the extension.
+	*/
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "file-text-crypto" is now active!');
+	const controller = new FTCController();
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('file-text-crypto.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from file-text-crypto!');
+	context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.test', controller.createSecret, controller));
+	// context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.gists-on', controller.gistsOn, controller));
+	// context.subscriptions.push(vscode.commands.registerTextEditorCommand('ftc.gists-on', controller.gistsOff, controller));
+
+	// const treeProvider = new TreeProvider(controller);
+
+	vscode.workspace.onDidChangeConfiguration(evt => {
+		if ( evt.affectsConfiguration('ftc') ) {
+			// TODO refresh
+		}
 	});
-
-	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
-export function deactivate() {}
+/**
+	* Sure not.
+	*/
+// export function deactivate() {}
