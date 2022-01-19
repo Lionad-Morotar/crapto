@@ -9,10 +9,11 @@
   "keywords": [
     "file",
     "crypto",
-    "text"
+    "text",
+    "aes",
+    "partial"
   ],
   "categories": [
-    "Snippets",
     "Other"
   ],
   "activationEvents": [
