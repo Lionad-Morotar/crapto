@@ -77,6 +77,13 @@
         "command": "ftc.decrypto",
         "key": "alt+f d"
       }
+    ],
+    "iconThemes": [
+      {
+        "id": "main-theme",
+        "label": "LOGO",
+        "path": "./theme/main.json"
+      }
     ]
   }
 }
