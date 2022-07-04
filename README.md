@@ -4,12 +4,16 @@
 
 ## Release Notes
 
+### 0.1.1
+
+* fix：alt f + d 如果选中了 lable（也就是加密内容字符串前后的记号：_*_），也能正常解密
+
 ### 0.1.0
 
 IMPORTANT！自动给每一个文件创建对应密钥，储存在 your_project/.ftc/keys.json。所以请务必修改 .gitignore，将 .ftc 文件夹放进 .gitignore 中！
 
-* 使用快捷键 alt+f i 快速输入加密内容
-* 使用快捷键 alt+f d 解密选中内容
+* feat：使用快捷键 alt+f i 在文档中插入加密内容
+* feat：使用快捷键 alt+f d 查看选中内容的解密结果
 
 ## 简介
 
