@@ -2,7 +2,7 @@
   "name": "file-text-crypto",
   "displayName": "file-text-crypto",
   "description": "crypto text which inside selected files or crypto entire file",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": "https://github.com/Lionad-Morotar/file-text-crypto",
   "engines": {
     "vscode": "^1.63.0"
