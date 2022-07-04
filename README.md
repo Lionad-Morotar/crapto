@@ -6,7 +6,7 @@
 
 ### 0.1.0
 
-自动给每一个文件创建对应密钥，储存在 your_project/.ftc/keys.json 中，请务必修改 .gitignore！
+IMPORTANT！自动给每一个文件创建对应密钥，储存在 your_project/.ftc/keys.json。所以请务必修改 .gitignore，将 .ftc 文件夹放进 .gitignore 中！
 
 * 使用快捷键 alt+f i 快速输入加密内容
 * 使用快捷键 alt+f d 解密选中内容

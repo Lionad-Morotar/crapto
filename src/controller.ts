@@ -10,7 +10,7 @@ const cryptoJS = require("crypto-js");
 
 export class FTCController {
 
-  private setting;
+  private setting: Setting;
 
   constructor() {
       this.setting = new Setting();
@@ -80,7 +80,10 @@ export class FTCController {
     const fsPath = editor.document.uri.fsPath;
     const key = await this.getKeyFor(fsPath);
     if (key) {
-      const secretText = cryptoJS.AES.decrypt(selection, key!.secret).toString(cryptoJS.enc.Utf8);
+      const label = this.setting.get().label;
+      // @example _*_base64_*_ -> base64
+      const text = selection.replaceAll(label, '');
+      const secretText = cryptoJS.AES.decrypt(text, key!.secret).toString(cryptoJS.enc.Utf8);
       vscode.window.showInformationMessage(secretText);
     } else {
       showError('No key found for this file.');
