@@ -3,6 +3,7 @@
   "displayName": "file-text-crypto",
   "description": "crypto text which inside selected files or crypto entire file",
   "version": "0.1.3",
+  "repository": "https://github.com/Lionad-Morotar/file-text-crypto",
   "engines": {
     "vscode": "^1.63.0"
   },
@@ -22,6 +23,7 @@
   ],
   "main": "./out/extension.js",
   "scripts": {
+    "publish": "vsce publish",
     "build": "node ./build/index.mjs",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
