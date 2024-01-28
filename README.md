@@ -1,29 +1,25 @@
-# file-text-crypto
-
-[TOC]
-
-## Release Notes
-
-### 0.1.1
-
-* fix：alt f + d 如果选中了 lable（也就是加密内容字符串前后的记号：_*_），也能正常解密
-
-### 0.1.0
-
-IMPORTANT！自动给每一个文件创建对应密钥，储存在 your_project/.ftc/keys.json。所以请务必修改 .gitignore，将 .ftc 文件夹放进 .gitignore 中！
-
-* feat：使用快捷键 alt+f i 在文档中插入加密内容
-* feat：使用快捷键 alt+f d 查看选中内容的解密结果
+---
+title: 👓 crypto-inline
+description: 一款可以给代码中部分内容加密的 VSCode 插件
+---
 
 ## 简介
 
-WIP Warning, PR wanted!
+crypto-inline，以下简称 FTC，是一款可以给你的代码中部分内容或全文加密的插件。
 
-file-text-crypto，以下简称 FTC，是一款可以给你的代码中部分内容或全文加密的插件。想象你有这么一个情景：在你的开源博客系统中，你写了一些带有隐式的日记，使用 FTC 可以让你在本地编辑时自由编辑，而编辑时生成的文本内容是加密后的信息，这样一来，就算上传到 Github 后，别人也无法查看到你的隐私原文。
+假设你想在开源的博客系统写了一些带有隐私的内容，FTC 允许你在本地编辑时查看加密内容，而项目上传时隐私仍然保持加密。
 
-**FTC 会把文件的密钥存在本地目录，所以请务必把密钥文件所在的文件夹加入 .gitignore（密钥默认储存在 .ftc 文件夹）防止 Git 系统把密钥传到了远端。**
+比如，这是一段隐私内容：_*_U2FsdGVkX1+9tlp8UGxEcYpzalYpSLLh//b3GjwE4s0=_*_，只有当我使用 VSCode 本地编辑时才能看到其内容。
 
-由于我的业余时间有限，所以目前仅支持加密 markdown 文件中的特定标识文本。如果你有其它更好的想法，欢迎 Pin Issues 或者 Pull Request ！
+**FTC 会把文件的密钥存在本地目录，所以请务必把密钥文件所在的文件夹（默认为 .ftc）加入 .gitignore（密钥默认储存在 .ftc 文件夹）防止 Git 系统把密钥传到了远端。**
+
+* 目前仅支持加密 markdown 文件中的特定标识文本。
+* Issues and Pull Request are Welcome！
+
+## 快捷键
+
+* `alt+f,i`，输入一段文本，并将其加密
+* `alt+f,d`，选中一段加密文本，将其解密，并在右下角弹窗显示原文
 
 ## 原理
 
@@ -47,4 +43,3 @@ Normal text...
 
 ```markdown
 <!-- FTC:entire -->
-
