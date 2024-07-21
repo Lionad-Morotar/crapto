@@ -16,6 +16,15 @@ crypto-inline，以下简称 FTC，是一款可以给你的代码中部分内容
 * 目前仅支持加密 markdown 文件中的特定标识文本。
 * Issues and Pull Request are Welcome！
 
+## Around
+
+如果你想在 VSCode 全局搜索中忽略此文件的内容，可以这样设置：
+
+1. 首先，打开用户 JSON 配置
+![image](https://github.com/user-attachments/assets/909b68e7-cd26-489e-9370-cc34608d3e42)
+2. 在`search.exclude`增加`.ftc`文件夹忽略
+![image](https://github.com/user-attachments/assets/302e3e1b-671b-49a4-9a8a-f14d477f0211)
+
 ## 快捷键
 
 * `alt+f,i`，输入一段文本，并将其加密
